@@ -9,7 +9,7 @@ import SwiftUI
 
 public class AlertManager: ObservableObject {
     
-    @Published var alertItem: AlertItem?
+    @Published public var alertItem: AlertItem?
     
     public func show(dismiss: AlertItem.Dismiss) {
         alertItem = AlertItem(dismiss: dismiss, primarySecondary: Optional.none)
