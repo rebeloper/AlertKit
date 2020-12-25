@@ -11,6 +11,10 @@ public class AlertManager: ObservableObject {
     
     @Published public var alertItem: AlertItem?
     
+    public init() {
+        
+    }
+    
     public func show(dismiss: AlertItem.Dismiss) {
         alertItem = AlertItem(dismiss: dismiss, primarySecondary: Optional.none)
     }
