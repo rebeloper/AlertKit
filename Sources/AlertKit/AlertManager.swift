@@ -9,6 +9,7 @@ import SwiftUI
 
 public class AlertManager: ObservableObject {
     @Published public var alertItem: AlertItem?
+    @Published public var actionSheetItem: ActionSheetItem?
     public init() { }
     
     public func show(dismiss: AlertItem.Dismiss) {
@@ -17,5 +18,9 @@ public class AlertManager: ObservableObject {
     
     public func show(primarySecondary: AlertItem.PrimarySecondary) {
         alertItem = AlertItem(dismiss: Optional.none, primarySecondary: primarySecondary)
+    }
+    
+    public func showActionSheet(_ sheet: ActionSheetItem.DefaultActionSheet) {
+        actionSheetItem = ActionSheetItem(defaultActionSheet: sheet)
     }
 }
