@@ -9,10 +9,6 @@ import SwiftUI
 
 extension View {
     
-    public func alertable() -> some View {
-        modifier(Alertable())
-    }
-    
     public func alertManager(_ alertManager: AlertManager) -> some View {
         self.modifier(AlertViewModifier(alertManager: alertManager))
     }
