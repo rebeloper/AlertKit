@@ -9,7 +9,7 @@ import SwiftUI
 
 extension View {
     
-    public func alertManager(_ alertManager: AlertManager) -> some View {
+    public func uses(_ alertManager: AlertManager) -> some View {
         self.modifier(AlertViewModifier(alertManager: alertManager))
     }
 }
