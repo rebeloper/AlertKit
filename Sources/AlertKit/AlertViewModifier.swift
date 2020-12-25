@@ -32,8 +32,9 @@ public struct AlertViewModifier: ViewModifier {
                     return Alert(title: Text("Error"), message: Text("Something went terribly wrong"), dismissButton: .cancel(Text("OK")))
                 }
             })
-            .actionSheet(item: $alertManager.alertItem) { (item) -> ActionSheet in
-                return ActionSheet(title: Text("Title"), message: Text("message"), buttons: [.cancel()])
+            .actionSheet(item: $alertManager.actionSheetItem) { (item) -> ActionSheet in
+                let type = item.defaultActionSheet
+                return ActionSheet(title: Text(type.title), message: Text(type.message), buttons: type.buttons)
             }
     }
 }
