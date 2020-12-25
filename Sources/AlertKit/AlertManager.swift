@@ -12,6 +12,7 @@ public class AlertManager: ObservableObject {
     public init() { }
     
     public func show(dismiss: AlertItem.Dismiss) {
+        print("Showing dismiss with message: \(dismiss.message)")
         alertItem = AlertItem(dismiss: dismiss, primarySecondary: Optional.none)
     }
     
