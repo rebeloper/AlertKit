@@ -30,7 +30,7 @@ import AlertKit
 ## 🧳 Features
 
 Here's the list of the awesome features `AlertKit` has:
-- [X] prograatic way to show `Alert`s in SwiftUI
+- [X] programatic way to show `Alert`s in SwiftUI
 - [X] you don't have to add `Alert`s as view modifiers any more
 - [X] supports `Action Sheet`s
 - [X] blends in perfectly with all other SwiftUI functioanlity and principles
@@ -92,7 +92,6 @@ struct ContentView: View {
         .uses(alertManager) // 2.
     }
 }
-
 ```
 
 ### 1️⃣ Dismiss Alert
