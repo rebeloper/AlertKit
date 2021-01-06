@@ -38,7 +38,7 @@ public struct AlertViewModifier: ViewModifier {
             }
             .universalAlert(isShowing: $alertManager.isUniversalAlertPresented, viewModel: alertManager.universalAlertViewModel, content: {
                 alertManager.universalAlertContent
-            }, actions: alertManager.universalAlertActions!)
+            }, actions: alertManager.universalAlertActions)
             
     }
 }
