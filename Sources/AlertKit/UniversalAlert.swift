@@ -9,16 +9,16 @@ import SwiftUI
 
 public struct UniversalAlert<Presenter, Content>: View where Presenter: View, Content: View {
     
-    @Binding public var isShowing: Bool
+    @Binding public var isShowing: Bool?
     
     public let displayContent: Content
-    public let buttons: [UniversalAlertButton]
+    public let buttons: [UniversalAlertButton]?
     public let presentationView: Presenter
     public let viewModel: UniversalAlertViewModel
     
     public var requireHorizontalPositioning: Bool {
         let maxButtonPositionedHorizontally = 2
-        return buttons.count > maxButtonPositionedHorizontally
+        return buttons!.count > maxButtonPositionedHorizontally
     }
     
     public var body: some View {
@@ -30,7 +30,7 @@ public struct UniversalAlert<Presenter, Content>: View where Presenter: View, Co
                     Spacer()
                     
                     ZStack {
-                        presentationView.disabled(isShowing)
+                        presentationView.disabled(isShowing!)
                         let expectedWidth = geometry.size.width * 0.7
                         
                         VStack {
@@ -40,7 +40,7 @@ public struct UniversalAlert<Presenter, Content>: View where Presenter: View, Co
                         .background(viewModel.contentBackgroundColor)
                         .cornerRadius(viewModel.contentCornerRadius)
                         .shadow(radius: 1)
-                        .opacity(self.isShowing ? 1 : 0)
+                        .opacity(self.isShowing! ? 1 : 0)
                         .frame(
                             minWidth: expectedWidth,
                             maxWidth: expectedWidth
@@ -56,7 +56,7 @@ public struct UniversalAlert<Presenter, Content>: View where Presenter: View, Co
     public func backgroundColor() -> some View {
         viewModel.backgroundColor
             .edgesIgnoringSafeArea(.all)
-            .opacity(self.isShowing ? 1 : 0)
+            .opacity(self.isShowing! ? 1 : 0)
     }
     
     public func buttonsPad(_ expectedWidth: CGFloat) -> some View {
@@ -72,9 +72,9 @@ public struct UniversalAlert<Presenter, Content>: View where Presenter: View, Co
     
     public func verticalButtonPad() -> some View {
         VStack {
-            ForEach(0..<buttons.count) {
+            ForEach(0..<buttons!.count) {
                 Divider().padding([.leading, .trailing], -viewModel.contentPadding)
-                let current = buttons[$0]
+                let current = buttons![$0]
                 
                 Button(action: {
                     if !current.isCancel {
@@ -82,7 +82,7 @@ public struct UniversalAlert<Presenter, Content>: View where Presenter: View, Co
                     }
                     
                     withAnimation {
-                        self.isShowing.toggle()
+                        self.isShowing!.toggle()
                     }
                 }, label: {
                     current.content.frame(height: 35)
@@ -101,11 +101,11 @@ public struct UniversalAlert<Presenter, Content>: View where Presenter: View, Co
             Spacer()
             
             if !requireHorizontalPositioning {
-                ForEach(0..<buttons.count) {
+                ForEach(0..<buttons!.count) {
                     if $0 != 0 {
                         Divider().frame(height: 44)
                     }
-                    let current = buttons[$0]
+                    let current = buttons![$0]
                     
                     Button(action: {
                         if !current.isCancel {
@@ -113,7 +113,7 @@ public struct UniversalAlert<Presenter, Content>: View where Presenter: View, Co
                         }
                         
                         withAnimation {
-                            self.isShowing.toggle()
+                            self.isShowing!.toggle()
                         }
                     }, label: {
                         current.content

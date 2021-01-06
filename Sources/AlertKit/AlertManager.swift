@@ -11,10 +11,10 @@ public class AlertManager: ObservableObject {
     @Published public var alertItem: AlertItem?
     @Published public var actionSheetItem: ActionSheetItem?
     
-    @Published public var isUniversalAlertPresented: Bool = false
+    @Published public var isUniversalAlertPresented: Bool? = false
     @Published public var universalAlertViewModel: UniversalAlertViewModel = UniversalAlertViewModel()
     @Published public var universalAlertContent: AnyView?
-    @Published public var universalAlertActions: [UniversalAlertButton] = []
+    @Published public var universalAlertActions: [UniversalAlertButton]?
     
     public init() { }
     
