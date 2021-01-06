@@ -12,7 +12,7 @@ public class AlertManager: ObservableObject {
     @Published public var actionSheetItem: ActionSheetItem?
     
     @Published public var isUniversalAlertPresented: Bool = false
-    @Published public var universalAlertViewModel: UniversalAlertViewModel?
+    @Published public var universalAlertViewModel: UniversalAlertViewModel = UniversalAlertViewModel()
     @Published public var universalAlertContent: AnyView?
     @Published public var universalAlertActions: [UniversalAlertButton]?
     
@@ -30,9 +30,8 @@ public class AlertManager: ObservableObject {
         actionSheetItem = ActionSheetItem(defaultActionSheet: sheet)
     }
     
-    public func showUniversalAlert<Content: View>(viewModel: UniversalAlertViewModel = UniversalAlertViewModel(), @ViewBuilder content: @escaping () -> Content, actions: [UniversalAlertButton]) {
+    public func showUniversalAlert<Content: View>(@ViewBuilder content: @escaping () -> Content, actions: [UniversalAlertButton]) {
         isUniversalAlertPresented = true
-        universalAlertViewModel = viewModel
         universalAlertContent = content() as? AnyView
         universalAlertActions = actions
     }

@@ -36,7 +36,7 @@ public struct AlertViewModifier: ViewModifier {
                 let type = item.defaultActionSheet
                 return ActionSheet(title: Text(type.title), message: Text(type.message), buttons: type.buttons)
             }
-            .universalAlert(isShowing: $alertManager.isUniversalAlertPresented, viewModel: alertManager.universalAlertViewModel!, content: {
+            .universalAlert(isShowing: $alertManager.isUniversalAlertPresented, viewModel: alertManager.universalAlertViewModel, content: {
                 alertManager.universalAlertContent
             }, actions: alertManager.universalAlertActions!)
             
