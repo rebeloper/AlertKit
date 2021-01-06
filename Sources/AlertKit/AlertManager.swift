@@ -32,7 +32,7 @@ public class AlertManager: ObservableObject {
     
     public func showUniversalAlert<Content: View>(@ViewBuilder content: @escaping () -> Content, actions: [UniversalAlertButton]) {
         isUniversalAlertPresented = true
-        universalAlertContent = content() as? AnyView
+        universalAlertContent = AnyView(content())
         universalAlertActions = actions
     }
 }
