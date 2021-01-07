@@ -15,10 +15,14 @@ public class CustomAlertManager: ObservableObject {
     }
     
     public func show() {
-        isPresented = true
+        withAnimation {
+            isPresented = true
+        }
     }
     
     public func dismiss() {
-        isPresented = false
+        withAnimation {
+            isPresented = false
+        }
     }
 }
