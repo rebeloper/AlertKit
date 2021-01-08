@@ -236,6 +236,95 @@ struct ContentView: View {
 }
 ```
 
+## 🎨 Custom Alert
+
+Custom alerts are different as they have a few more steps to set up.
+
+1. Declare one ore more  `CustomAlertManager`s:
+
+```
+@StateObject var customAlertManager = CustomAlertManager()
+
+@StateObject var customAlertManager2 = CustomAlertManager()
+```
+
+You have to declare one for each custom alert that you want to present.
+
+2. Optionally, if you are using `TextField`s you have to set a `@State` variable that will hold the text value
+
+```
+@State private var customAlertText: String = ""
+```
+
+3. Set up the custom alert on the root View:
+
+```
+VStack {
+    ...
+}
+.customAlert(manager: customAlertManager, content: {
+    VStack {
+        Text("Hello Custom Alert").bold()
+        TextField("Enter email", text: $customAlertText).textFieldStyle(RoundedBorderTextFieldStyle())
+    }
+}, buttons: [
+    .cancel(content: {
+        Text("Cancel").bold()
+    }),
+    .regular(content: {
+        Text("Send")
+    }, action: {
+        print("Sending email: \(customAlertText)")
+    })
+])
+```
+
+You may add any `View` as the `content` of your custom alert. You have two button types: 
+- `.regular` has an action; it dismisses the alert with that action
+- `.cancel` has only content and **no** action; it dismisses the alert without any action
+
+```
+.customAlert(manager: customAlertManager2, content: {
+    VStack(spacing: 12) {
+        Text("Hello Custom Alert 2").bold()
+        Text("Some message here")
+    }
+}, buttons: [
+    .regular(content: {
+        Text("Go")
+    }, action: {
+        print("Go")
+    }),
+    .cancel(content: {
+        Image(systemName: "bell.slash.fill").resizable().frame(width: 33, height: 33).foregroundColor(Color(.systemPurple))
+    }),
+    .cancel(content: {
+        Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.").bold()
+    })
+])
+```
+
+**IMPORTANT: You must provide at least one button!**
+
+4. Triger the custom alert(s):
+
+```
+VStack {
+    ...
+    Button(action: {
+        customAlertManager.show()
+    }, label: {
+        Text("Show custom alert")
+    })
+    
+    Button(action: {
+        customAlertManager2.show()
+    }, label: {
+        Text("Show custom alert 2")
+    })
+}
+```
+
 ## 🪁 Demo project
 
 For a comprehensive Demo project check out: 
