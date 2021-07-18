@@ -127,3 +127,10 @@ public struct CustomAlertViewModifier<AlertContent: View>: ViewModifier {
     
 }
 
+#if os(watchOS)
+extension UIColor {
+    public static var systemBackground: UIColor {
+        return UIColor(.black)
+    }
+}
+#endif
