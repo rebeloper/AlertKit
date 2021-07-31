@@ -28,8 +28,8 @@ public struct CustomAlertButton {
     }
 
     public static func regular<Content: View>(@ViewBuilder content: @escaping () -> Content,
-        action: @escaping () -> Void) -> CustomAlertButton {
-        CustomAlertButton(content: content, action: action, type: .regular)
+        action: @escaping () -> Void, isDisabled: Bool = false) -> CustomAlertButton {
+        CustomAlertButton(content: content, action: action, type: .regular, isDisabled: isDisabled)
     }
 
     public init<Content: View>(@ViewBuilder content: @escaping () -> Content, action: @escaping () -> Void, type: Variant, isDisabled: Bool = false) {
