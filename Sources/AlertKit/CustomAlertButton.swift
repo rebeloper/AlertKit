@@ -17,6 +17,7 @@ public struct CustomAlertButton {
     public let content: AnyView
     public let action: () -> Void
     public let type: Variant
+    public let isDisabled: Bool
 
     public var isCancel: Bool {
         type == .cancel
@@ -31,9 +32,10 @@ public struct CustomAlertButton {
         CustomAlertButton(content: content, action: action, type: .regular)
     }
 
-    public init<Content: View>(@ViewBuilder content: @escaping () -> Content, action: @escaping () -> Void, type: Variant ) {
+    public init<Content: View>(@ViewBuilder content: @escaping () -> Content, action: @escaping () -> Void, type: Variant, isDisabled: Bool = false) {
         self.content = AnyView(content())
         self.type = type
         self.action = action
+        self.isDisabled = isDisabled
     }
 }

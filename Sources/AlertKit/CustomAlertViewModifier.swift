@@ -82,6 +82,7 @@ public struct CustomAlertViewModifier<AlertContent: View>: ViewModifier {
                 }, label: {
                     current.content
                 })
+                .disabled(current.isDisabled)
                 .padding(8)
                 .frame(minHeight: 44)
             }
