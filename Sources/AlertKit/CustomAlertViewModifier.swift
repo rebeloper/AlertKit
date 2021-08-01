@@ -23,7 +23,10 @@ public struct CustomAlertViewModifier<AlertContent: View>: ViewModifier {
             content.disabled(customAlertManager.isPresented)
             if customAlertManager.isPresented {
                 GeometryReader { geometry in
-                    Color.black.opacity(0.2).ignoresSafeArea()
+                    Color(.systemBackground)
+                        .colorInvert()
+                        .opacity(0.2)
+                        .ignoresSafeArea()
                     HStack {
                         Spacer()
                         VStack {
