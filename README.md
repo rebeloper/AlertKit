@@ -9,7 +9,7 @@
 ## 💻 Installation
 ### 📦 Swift Package Manager
 Using <a href="https://swift.org/package-manager/" rel="nofollow">Swift Package Manager</a>, add it as a Swift Package in Xcode 11.0 or later, `select File > Swift Packages > Add Package Dependency...` and add the repository URL:
-```
+```shell
 https://github.com/rebeloper/AlertKit.git
 ```
 ### ✊ Manual Installation
@@ -23,7 +23,7 @@ Download and include the `AlertKit` folder and files in your codebase.
 
 Import `AlertKit` into your `View`
 
-```
+``` swift
 import AlertKit
 ```
 
@@ -39,7 +39,7 @@ Here's the list of the awesome features `AlertKit` has:
 
 In `SwiftUI` alerts are added as view modifiers with a bit of help from `@State`:
 
-```
+``` swift
 struct ContentView: View {
     
     @State private var isSwiftUIAlertPresented = false
@@ -62,7 +62,7 @@ This will get ugly really quickly if you're trying to add multiple `Alert`s on a
 
 With `AlertKit` you can invoke an `Alert` as simple as calling: 
 
-```
+``` swift
 alertManager.show(dismiss: .success(message: "AlertKit is awesome"))
 ```
 
@@ -74,7 +74,7 @@ Using `AlertKit` is super simple:
 2. add the `.uses(_:)` view-modifier
 3. show an alert 🤩
 
-```
+``` swift
 import AlertKit
 
 struct ContentView: View {
@@ -101,14 +101,14 @@ There are two types of alerts in `SwiftUI`. The `Dismiss Alert` is one of them. 
  - [X] message
  - [X] **one** button (dismiss)
  
- ```
+ ``` swift
  alertManager.show(dismiss: .success(message: "AlertKit is awesome"))
  ```
  
  `AlertKit` comes with some predifined helpers to make your life easier. In all of the above the only variable is the `meassage`. `Title` and `button(s)` are predifined if that is the case. Of course you may override any or all of them if you wish. 
  **Important:** Make sure that you use the `dismiss` ones with the `dismiss` alert and the `primarySeconday` with the `primarySecoondary` alert.
 
-```
+``` swift
 alertManager.show(dismiss: .custom(title: "AlertKit", message: "AlertKit is awesome", dismissButton: .cancel()))
 
 alertManager.show(dismiss: .success(message: "AlertKit is awesome"))
@@ -129,7 +129,7 @@ The second type of alert displayes two buttons (instead of one):
 
 Here are the ways you may call it:
 
-```
+``` swift
 alertManager.show(primarySecondary: .custom(title: "AlertKit", message: "AlertKit is awesome", primaryButton: Alert.Button.destructive(Text("OK")), secondaryButton: Alert.Button.cancel()))
 
 alertManager.show(primarySecondary: .success(title: "AlertKit", message: "AlertKit is awesome", primaryButton: Alert.Button.destructive(Text("OK")), secondaryButton: Alert.Button.cancel()))
@@ -145,7 +145,7 @@ alertManager.show(primarySecondary: .info(title: "AlertKit", message: "AlertKit 
 
 Want **more than two buttons** on the `Alert`? Well, you will have to use an `Action Sheet`:
 
-```
+``` swift
 Button("Show Action Sheet") {
     let buttons: [ActionSheet.Button] = [
         .destructive(Text("Do some work"), action: {
@@ -170,7 +170,7 @@ Note that you can use all of the `Alert.Button`s SwiftUI provides. Here I'm usin
 
 Speaking of clean code... I highly recommend using a `view model` for your view. Here's mine that is simulating fetching some data by simply letting time pass:
 
-```
+``` swift
 //
 //  ContentViewModel.swift
 //  
@@ -182,9 +182,9 @@ class ContentViewModel: ObservableObject {
     func fetchData(completion: @escaping (Result<Bool, Error>) -> ()) {
         DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + 4) {
             DispatchQueue.main.async {
-//                completion(.success(true))
+                // completion(.success(true))
                 completion(.success(false))
-//                completion(.failure(NSError(domain: "Could not fetch data", code: 404, userInfo: nil)))
+                // completion(.failure(NSError(domain: "Could not fetch data", code: 404, userInfo: nil)))
             }
         }
     }
@@ -193,7 +193,7 @@ class ContentViewModel: ObservableObject {
 
 And in my `ContentView` I'm using it like so:
 
-```
+``` swift
 //
 //  ContentView.swift
 //  
@@ -242,7 +242,7 @@ Custom alerts are different as they have a few more steps to set up.
 
 1. Declare one ore more  `CustomAlertManager`s:
 
-```
+``` swift
 @StateObject var customAlertManager = CustomAlertManager()
 
 @StateObject var customAlertManager2 = CustomAlertManager()
@@ -252,13 +252,13 @@ You have to declare one for each custom alert that you want to present.
 
 2. Optionally, if you are using `TextField`s you have to set a `@State` variable that will hold the text value
 
-```
+``` swift
 @State private var customAlertText: String = ""
 ```
 
 3. Set up the custom alert on the root View:
 
-```
+``` swift
 VStack {
     ...
 }
@@ -283,7 +283,7 @@ You may add any `View` as the `content` of your custom alert. You have two butto
 - `.regular` has an action; it dismisses the alert with that action
 - `.cancel` has only content and **no** action; it dismisses the alert without any action
 
-```
+``` swift
 .customAlert(manager: customAlertManager2, content: {
     VStack(spacing: 12) {
         Text("Hello Custom Alert 2").bold()
@@ -308,7 +308,7 @@ You may add any `View` as the `content` of your custom alert. You have two butto
 
 4. Triger the custom alert(s):
 
-```
+``` swift
 VStack {
     ...
     Button(action: {
