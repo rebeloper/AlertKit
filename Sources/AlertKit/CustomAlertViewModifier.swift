@@ -23,7 +23,10 @@ public struct CustomAlertViewModifier<AlertContent: View>: ViewModifier {
             content.disabled(customAlertManager.isPresented)
             if customAlertManager.isPresented {
                 GeometryReader { geometry in
-                    Color.black.opacity(0.2).ignoresSafeArea()
+                    Color(.systemBackground)
+                        .colorInvert()
+                        .opacity(0.2)
+                        .ignoresSafeArea()
                     HStack {
                         Spacer()
                         VStack {
@@ -82,6 +85,7 @@ public struct CustomAlertViewModifier<AlertContent: View>: ViewModifier {
                 }, label: {
                     current.content
                 })
+                .disabled(current.isDisabled)
                 .padding(8)
                 .frame(minHeight: 44)
             }
@@ -116,6 +120,7 @@ public struct CustomAlertViewModifier<AlertContent: View>: ViewModifier {
                     }, label: {
                         current.content
                     })
+                    .disabled(current.isDisabled)
                     .padding(8)
                     .frame(maxWidth: maxHorizontalWidth, minHeight: 44)
                 }
